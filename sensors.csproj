@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="models\InvestigationManager.cs" />
+    <Compile Include="models\IranianAgent.cs" />
+    <Compile Include="models\sensorses\BasicSensor.cs" />
+    <Compile Include="models\sensorses\Sensor.cs" />
+    <Compile Include="models\sensorses\TermiSensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,5 +57,6 @@
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

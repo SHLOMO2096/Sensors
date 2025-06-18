@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace sensors.models
 {
-    internal class BasicSensor : Sensor
+    public class BasicSensor : Sensor
     {
         public BasicSensor(string name) : base(name)
         {
         }
-        public override void IsActivate()
+        public override void Activate()
         {
-            Activate = true;
+            //Activate = true;
         }
     }
 }

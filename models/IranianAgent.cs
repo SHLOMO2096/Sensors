@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace sensors.models
 {
-    internal class IranianAgent
+    public class IranianAgent
     {
         public string Name { get; set; }
         public List<string> Sensitivity { get; set; }
         public List<Sensor> ActiveSensors { get; set; }
-        public IranianAgent(string name) 
+        private int matchCount = 0;
+
+        public IranianAgent(string name)
         {
             Name = name;
             Sensitivity = new List<string>();
@@ -19,7 +22,8 @@ namespace sensors.models
 
             List<string> possibleSensorTypes = new List<string> { "Audio", "Pulse", "Motion", "Thermal", "basic", };
             Random random = new Random();
-            for (int i = 0; i > 2; i++)
+            const int LengthOf = 2;
+            for (int i = 0; i < LengthOf; i++)
             {
                 int index = random.Next(possibleSensorTypes.Count);
                 Sensitivity.Add(possibleSensorTypes[index]);
@@ -31,22 +35,30 @@ namespace sensors.models
             ActiveSensors.Add(sensor);
         }
 
-        public IranianAgent clone()
-        {
-            return new IranianAgent(this.Name)
-            {
-                Sensitivity = new List<string>(this.Sensitivity),
-                ActiveSensors = new List<Sensor>(this.ActiveSensors)
-            };
 
-        }
-        public int GetActiveSensorsCount()
+        public int CheckSensor(Sensor Sensorname)
         {
             
+            if (Sensitivity.Contains(Sensorname.Name))
+            {
+                Sensitivity.Remove(Sensorname.Name);
+                matchCount++;
+                Console.WriteLine("${matchCount}/2");
+            }
+            else
+            {
+                Console.WriteLine($"{matchCount}/2");
+            }
+
+            return matchCount;
         }
+            
+            
+        
         public bool IsExposed()
         {
-
+            const int requiredMatches = 2;
+            return matchCount >= requiredMatches;
         }
     }
 }

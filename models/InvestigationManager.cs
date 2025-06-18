@@ -6,26 +6,41 @@ using System.Threading.Tasks;
 
 namespace sensors.models
 {
-    internal class InvestigationManager
+    public class InvestigationManager
     {
-        public InvestigationManager(IranianAgent agent)
+        private IranianAgent agent;
+
+        public InvestigationManager(IranianAgent singleAgent)
         {
-            IranianAgent Agent = new IranianAgent("Achmed");
-            
+            agent = singleAgent;
         }
-        public void start() 
-        { 
-            
-            List<string> Weaknesses = new List<string>();
 
-            for (int i = 0; i>2; i++)
+        public void AttachSensorAndScan(Sensor sensor)
+        {
+            agent.AttachSensor(sensor);
+
+            int result = agent.CheckSensor(sensor);
+
+            Console.WriteLine($"Sensor '{sensor.Name}' attached to Agent '{agent.Name}'");
+            Console.WriteLine($"Result: {result}/2");
+
+            if (agent.IsExposed())
             {
-                int index = random.Next(possibleSensorTypes.Count);
-                Weaknesses.Add(possibleSensorTypes[index]);
+                Console.WriteLine($" Agent '{agent.Name}' is EXPOSED!");
             }
-            Agent.Sensitivity = Weaknesses;
-            Agent.ActiveSensors = new List<Sensor>();
+        }
 
+        public void ShowAttachedSensors()
+        {
+            Console.WriteLine($"Agent '{agent.Name}' has the following attached sensors:");
+            foreach (var sensor in agent.ActiveSensors)
+            {
+                Console.WriteLine($" - {sensor.Name}");
+            }
+        }
+        public IranianAgent GetAgent()
+        {
+            return agent;
         }
     }
 }

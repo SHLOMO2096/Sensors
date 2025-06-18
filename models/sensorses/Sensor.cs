@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace sensors.models
 {
-    internal class Sensor
+    public abstract class Sensor
     {
         public string Name { get; set; }
-        public bool Activate { get; set; }
+        //public bool Activate { get; set; }
 
         public Sensor(string name)
         {
             Name = name;
-            Activate = false;
-            IsActivate();
+            
 
         }
-        public virtual void IsActivate()
-        {
-            Activate = true;
-        }
+        public abstract void Activate();
+        
+           
+        
     }
 }

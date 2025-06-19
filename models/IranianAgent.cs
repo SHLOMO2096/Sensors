@@ -12,6 +12,8 @@ namespace sensors.models
         public string Name { get; set; }
         public List<string> Sensitivity { get; set; }
         public List<Sensor> ActiveSensors { get; set; }
+        public List<string> ListOfOptionalSensorsORWeaknesses { get; set; }
+
         private int matchCount = 0;
 
         public IranianAgent(string name)
@@ -19,14 +21,14 @@ namespace sensors.models
             Name = name;
             Sensitivity = new List<string>();
             ActiveSensors = new List<Sensor>();
+            ListOfOptionalSensorsORWeaknesses = new List<string> { "Audio", "Thermal", "Pulse", "Motion", "Magnetic", "Signal", "Light" };
 
-            List<string> possibleSensorTypes = new List<string> { "Audio", "Pulse", "Motion", "Thermal", "basic", };
             Random random = new Random();
-            const int LengthOf = 2;
+            int LengthOf = ListOfOptionalSensorsORWeaknesses.Count;
             for (int i = 0; i < LengthOf; i++)
             {
-                int index = random.Next(possibleSensorTypes.Count);
-                Sensitivity.Add(possibleSensorTypes[index]);
+                int index = random.Next(LengthOf);
+                Sensitivity.Add(ListOfOptionalSensorsORWeaknesses[index]);
             }
         }
 
@@ -35,10 +37,8 @@ namespace sensors.models
             ActiveSensors.Add(sensor);
         }
 
-
         public int CheckSensor(Sensor Sensorname)
         {
-            
             if (Sensitivity.Contains(Sensorname.Name))
             {
                 Sensitivity.Remove(Sensorname.Name);
@@ -49,12 +49,9 @@ namespace sensors.models
             {
                 Console.WriteLine($"{matchCount}/2");
             }
-
             return matchCount;
         }
             
-            
-        
         public bool IsExposed()
         {
             const int requiredMatches = 2;

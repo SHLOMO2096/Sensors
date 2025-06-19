@@ -45,9 +45,15 @@
   <ItemGroup>
     <Compile Include="models\InvestigationManager.cs" />
     <Compile Include="models\IranianAgent.cs" />
-    <Compile Include="models\sensorses\BasicSensor.cs" />
+    <Compile Include="models\sensorses\AudioSensor.cs" />
+    <Compile Include="models\sensorses\FactorySensor.cs" />
+    <Compile Include="models\sensorses\LightSensor.cs" />
+    <Compile Include="models\sensorses\MagneticSensor.cs" />
+    <Compile Include="models\sensorses\MotionSensor.cs" />
+    <Compile Include="models\sensorses\PulseSensor.cs" />
     <Compile Include="models\sensorses\Sensor.cs" />
-    <Compile Include="models\sensorses\TermiSensor.cs" />
+    <Compile Include="models\sensorses\SignalSensor.cs" />
+    <Compile Include="models\sensorses\ThermalSensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

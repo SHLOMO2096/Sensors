@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sensors.models
+namespace sensors.models.sensorses
 {
-    public class BasicSensor : Sensor
+    public class SignalSensor : Sensor
     {
-        public BasicSensor(string name) : base(name)
+        public SignalSensor(string name) : base(name)
         {
         }
         public override void Activate()

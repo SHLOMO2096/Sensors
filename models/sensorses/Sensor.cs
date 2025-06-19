@@ -9,17 +9,14 @@ namespace sensors.models
     public abstract class Sensor
     {
         public string Name { get; set; }
-        //public bool Activate { get; set; }
-
+        public bool IsBroken { get; set; } = false;
+        protected int ActivCount { get; set; }
         public Sensor(string name)
         {
             Name = name;
-            
-
+            ActivCount = 0;
         }
-        public abstract void Activate();
-        
-           
-        
+
+        public abstract Task Activate();
     }
 }

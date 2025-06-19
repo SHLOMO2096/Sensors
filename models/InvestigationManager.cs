@@ -17,17 +17,24 @@ namespace sensors.models
 
         public void AttachSensorAndScan(Sensor sensor)
         {
-            agent.AttachSensor(sensor);
-
-            int result = agent.CheckSensor(sensor);
-
-            Console.WriteLine($"Sensor '{sensor.Name}' attached to Agent '{agent.Name}'");
-            Console.WriteLine($"Result: {result}/2");
-
-            if (agent.IsExposed())
+            if (!sensor.IsBroken)
             {
-                Console.WriteLine($" Agent '{agent.Name}' is EXPOSED!");
+                agent.AttachSensor(sensor);
+                int result = agent.CheckSensor(sensor);
+
+                Console.WriteLine($"Sensor '{sensor.Name}' attached to Agent '{agent.Name}'");
+                Console.WriteLine($"Result: {result}/2");
+
+                if (agent.IsExposed())
+                {
+                    Console.WriteLine($" Agent '{agent.Name}' is EXPOSED!");
+                }
             }
+            else
+            {
+                Console.WriteLine($"the {sensor.Name}Sensor is broken try again in 30 seconds");
+            }
+
         }
 
         public void ShowAttachedSensors()

@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sensors.models;
+using sensors.models.sensorses;
 
 namespace sensors
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             IranianAgent agent = new IranianAgent("Ali");
             InvestigationManager manager = new InvestigationManager(agent);
 
-            List<string> availableSensors = new List<string> { "Audio", "Pulse", "Motion", "Thermal", "Basic" };
+            List<string> availableSensors = agent.ListOfOptionalSensorsORWeaknesses;
 
             Console.WriteLine("Welcome to the Iranian Agent Exposure Game");
             Console.WriteLine("An agent is hiding with 2 weaknesses. Try to find them!");
@@ -27,13 +28,14 @@ namespace sensors
                     Console.WriteLine($"{i + 1}. {availableSensors[i]}");
                 }
 
-                Console.Write("Enter a number (1-5): ");
+                Console.Write($"Enter a number (1-{availableSensors.Count}): ");
                 string input = Console.ReadLine();
 
                 if (int.TryParse(input, out int choice) && choice >= 1 && choice <= availableSensors.Count)
                 {
                     string sensorName = availableSensors[choice - 1];
-                    Sensor sensor = new BasicSensor(sensorName);
+                    Sensor sensor = FactorySensor.CreatSensor(sensorName);
+                    await sensor.Activate();
 
                     manager.AttachSensorAndScan(sensor);
                 }
